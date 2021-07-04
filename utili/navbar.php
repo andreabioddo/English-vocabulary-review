@@ -1,7 +1,7 @@
 <style>
 body {margin:0;}
 
-ul {
+.ul-nav {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -12,11 +12,11 @@ ul {
   width: 100%;
 }
 
-li {
+.li-nav{
   float: left;
 }
 
-li a {
+.li-nav a {
   display: block;
   color: white;
   text-align: center;
@@ -24,16 +24,18 @@ li a {
   text-decoration: none;
 }
 
-li a:hover:not(.active) {
+.li-nav a:hover:not(.active) {
   background-color: #c98912;
 }
 
 </style>
 
-<ul>
-  <li><a href="parole">Parole</a></li>
-  <li><a href="tipi">Liste</a></li>
-  <li><a href="ripassa">Ripassa</a></li>
-  <li><a href="correggi_errori">Correggi Errori</a></li>
-  <li><a href="https://www.andreabioddo.com">About</a></li>
+<ul class="ul-nav">
+  <li class="li-nav"><a href="parole">Parole</a></li>
+  <li class="li-nav"><a href="tipi">Liste</a></li>
+  <li class="li-nav"><a href="ripassa">Ripassa</a></li>
+  <li class="li-nav"><a href="correggi_errori">Correggi Errori</a></li>
+  <li class="li-nav"><a href="istruzioni">Istruzioni</a></li>
+  <li class="li-nav"><a href="login">Login</a></li>
+  <li class="li-nav"><a href="https://www.andreabioddo.com">About</a></li>
 </ul>
