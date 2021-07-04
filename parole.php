@@ -18,8 +18,8 @@ if(!isset($_SESSION["ID_PERSONA"])){
 if(isset($_POST["aggiungi"])){
 
   //prendo i parametri di Tipo POST dal file chiamante e li salvo in una variabile
-  $EN = $_POST["EN"];
-  $IT = $_POST["IT"];
+  $EN = ucfirst($_POST["EN"]);
+  $IT = ucfirst($_POST["IT"]);
   $tipo = $_POST["Tipo"];
   $ID_PERSONA = $_SESSION["ID_PERSONA"];
   //preparo la query

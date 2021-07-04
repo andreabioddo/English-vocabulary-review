@@ -12,8 +12,8 @@ session_start();
 $error = array();
 if(isset($_POST["register"])){
   //prendo i parametri di Tipo POST dal file chiamante e li salvo in una variabile
-  $username = $_POST["username"];
-  $email = $_POST["email"];
+  $username = strtolower($_POST["username"]);
+  $email = strtolower($_POST["email"]);
   $psw = $_POST["psw"];
 
 

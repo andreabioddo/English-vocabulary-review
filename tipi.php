@@ -12,7 +12,7 @@
     <input type='text' id='tipi' name='tipi'><br>
     <input type="checkbox" id="pubblico" name="pubblico" value="1">
     <label for="pubblico">Pubblico</label><br>
-    <button type="submit" class=""  name="aggiungi_tipo">Aggiungi</button>
+    <button type="submit" name="aggiungi_tipo">Aggiungi</button>
 </form> 
 <hr>
 
@@ -30,7 +30,7 @@ if(isset($_POST["aggiungi_tipo"]) && $_POST["tipi"]!=""){
     $tipo_nuovo = $_POST["tipi"]; //salvo il nuovo tipo
     $pubblico = isset($_POST["pubblico"])?$_POST["pubblico"]:"0"; //setto lo stato del nuovo tipo
     //query per aggiunta del tipo su db
-    $query = "INSERT INTO tipo_parola(Descrizione, ID_PERSONA, Pubblico) VALUES ('$tipo_nuovo', '$ID_PERSONA', '$pubblico')";
+    $query = "INSERT INTO tipo_parola(Descrizione, ID_PERSONA, Pubblico, Data_Inserimento) VALUES ('$tipo_nuovo', '$ID_PERSONA', '$pubblico't, $date)";
     mysqli_query($database, $query);
 }
 
@@ -66,7 +66,7 @@ echo"
     ";
 
 $i = 0;
-while($row = mysqli_fetch_array($result)){ //scrivo tutte le righe, creo il form
+while($row = mysqli_fetch_array($result)){ //scrivo tutte le righe, creo il form per poter aggiornare / eliminare un tipo
     $attivo = ($row["Pubblico"]==1)?"checked":"";
     echo  "<textarea hidden name='tipi[".$i."][ID_TIPO]'>".$row["ID_TIPO"]." </textarea>" .
     "<label>". $row["Descrizione"] . " </label> <br>   " .

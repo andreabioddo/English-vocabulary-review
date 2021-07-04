@@ -19,7 +19,7 @@ if(isset($_SESSION["ID_PERSONA"])){
 $error = array();
 if(isset($_POST["login"])){
     //prendo i parametri di Tipo POST dal file chiamante e li salvo in una variabile
-    $usernameEmail = $_POST["usernameEmail"];
+    $usernameEmail = strtolower($_POST["usernameEmail"]);
     $psw = $_POST["password"];
 
     $password = md5($psw);
