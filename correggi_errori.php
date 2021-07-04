@@ -73,8 +73,8 @@ if(isset($_POST["inizia"])){
             <textarea hidden name='num_errori'>".$num_errori." </textarea>
             <textarea hidden name='ID_SESSIONE'>$ID_SESSIONE</textarea>
         ";
-        //prendo i paramtri IT, EN e l?ID_PAROLE della parola che rispetta i criteri, ovvero della sessione, della persoa e che sia stata scritta sbagluata (==CORRETTO = 0)
-        $query = "SELECT parole.IT, parole.EN, parole.ID_PAROLE FROM parole INNER JOIN sessione_dettaglio ON sessione_dettaglio.ID_PAROLA = parole.ID_PAROLE INNER JOIN sessione ON sessione.ID_SESSIONE=sessione_dettaglio.ID_SESSIONE WHERE sessione_dettaglio.Corretto=0 AND sessione.ID_PERSONA=$ID_PERSONA AND sessione.ID_SESSIONE=$ID_SESSIONE ORDER BY RAND()";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
+        //prendo i paramtri IT, EN e l?ID_PAROLA della parola che rispetta i criteri, ovvero della sessione, della persoa e che sia stata scritta sbagluata (==CORRETTO = 0)
+        $query = "SELECT parole.IT, parole.EN, parole.ID_PAROLA FROM parole INNER JOIN sessione_dettaglio ON sessione_dettaglio.ID_PAROLA = parole.ID_PAROLA INNER JOIN sessione ON sessione.ID_SESSIONE=sessione_dettaglio.ID_SESSIONE WHERE sessione_dettaglio.Corretto=0 AND sessione.ID_PERSONA=$ID_PERSONA AND sessione.ID_SESSIONE=$ID_SESSIONE ORDER BY RAND()";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
         $result = mysqli_query($database, $query); //esegue la query e salva su result
         $i = 0; //inizializzo i
         //per ogni n riga (== num_errori) esegue, tale che n <= num_errori...
@@ -83,7 +83,7 @@ if(isset($_POST["inizia"])){
             //crea il form per inserire la risposta
             echo
                 "
-                <textarea hidden name='risposta[".$i."][ID_PAROLA]'>".$row["ID_PAROLE"]." </textarea>
+                <textarea hidden name='risposta[".$i."][ID_PAROLA]'>".$row["ID_PAROLA"]." </textarea>
                 <label for='domanda".$i."'>".$row[$tipo_esercizio]."</label><br>
                 <input type='text' id='domanda' name='risposta[".$i."][risposta]'><br>
                 "
@@ -115,7 +115,7 @@ if(isset($_POST["controlla"]) && isset($_POST["num_errori"])){
     while($risposte!="null" && $j != sizeof($risposte)){ //eseguo il ciclo n volte (n==num_rispsoste). Se $risposte == null allora finisco
         $ID_PAROLA = $risposte[$j]["ID_PAROLA"];//salvo l'ID_PAROLA, preso dalle risposte
         $rispostaData = $risposte[$j]["risposta"];//salvo la risposta data dall'utente
-        $query = "SELECT `IT`,`EN` FROM `parole` WHERE ID_PAROLE='$ID_PAROLA'"; //carica gli attributi EN e IT della parola, tramite l'ID_PAROLA
+        $query = "SELECT `IT`,`EN` FROM `parole` WHERE ID_PAROLA='$ID_PAROLA'"; //carica gli attributi EN e IT della parola, tramite l'ID_PAROLA
         $result = mysqli_query($database, $query);
         $row = mysqli_fetch_array($result); //eseguo la query e la salvo
         

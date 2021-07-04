@@ -59,15 +59,15 @@ if(isset($_POST["inizia"])){
         //ci sono due casi: TIPO = MIX --> selezione tutte le parole di mia propietà e le parole presenti in tutte le liste liste pubbliche
         //TIPO != MIX --> seleziono tutte le parole del tipo che mi interessano
         $query = ($tipo_parola!="mix")?
-                    "SELECT DISTINCT `IT`,`EN`, `ID_PAROLE` FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO=tipo_parola.ID_TIPO WHERE tipo_parola.ID_TIPO='$tipo_parola' ORDER BY RAND()":
-                    "SELECT DISTINCT `IT`,`EN`, `ID_PAROLE` FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO=tipo_parola.ID_TIPO WHERE tipo_parola.Pubblico=1 OR tipo_parola.ID_PERSONA=$ID_PERSONA ORDER BY RAND()";
+                    "SELECT DISTINCT `IT`,`EN`, `ID_PAROLA` FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO=tipo_parola.ID_TIPO WHERE tipo_parola.ID_TIPO='$tipo_parola' ORDER BY RAND()":
+                    "SELECT DISTINCT `IT`,`EN`, `ID_PAROLA` FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO=tipo_parola.ID_TIPO WHERE tipo_parola.Pubblico=1 OR tipo_parola.ID_PERSONA=$ID_PERSONA ORDER BY RAND()";
         
         $result = mysqli_query($database, $query); //esegue la query e salva su result
         $i = 0;
         //per ogni n riga (== num_domande) esegue, tale che n <= num_domande...
         while($i!=$num_domande && $row = mysqli_fetch_array($result)){ 
             
-            $query2 = "SELECT COUNT(sessione_dettaglio.ID_PAROLA) as cont FROM sessione_dettaglio INNER JOIN sessione ON sessione_dettaglio.ID_SESSIONE=sessione.ID_SESSIONE WHERE sessione.ID_PERSONA = $ID_PERSONA AND sessione_dettaglio.ID_PAROLA=".$row["ID_PAROLE"];
+            $query2 = "SELECT COUNT(sessione_dettaglio.ID_PAROLA) as cont FROM sessione_dettaglio INNER JOIN sessione ON sessione_dettaglio.ID_SESSIONE=sessione.ID_SESSIONE WHERE sessione.ID_PERSONA = $ID_PERSONA AND sessione_dettaglio.ID_PAROLA=".$row["ID_PAROLA"];
 
             //conto quante volte la domanda è apparsa nella query, se è apparsa >= 10 viene "evitata"
             $cont = mysqli_query($database, $query2); //esegue la query e salva su result
@@ -81,7 +81,7 @@ if(isset($_POST["inizia"])){
                 //crea il form per inserire la risposta
                 echo
                     "
-                    <textarea hidden name='risposta[".$i."][ID_PAROLA]'>".$row["ID_PAROLE"]." </textarea>
+                    <textarea hidden name='risposta[".$i."][ID_PAROLA]'>".$row["ID_PAROLA"]." </textarea>
                     <label for='domanda".$i."'>".$row[$tipo_esercizio]."</label><br>
                     <input type='text' id='domanda' name='risposta[".$i."][risposta]'><br>
                     "
@@ -127,7 +127,7 @@ if(isset($_POST["controlla"]) && isset($_POST["num_domande"])){
     while($risposte!="null" && $j != sizeof($risposte)){ //eseguo il ciclo n volte (n==num_rispsoste). Se $risposte == null allora finisco
         $ID_PAROLA = $risposte[$j]["ID_PAROLA"];//salvo l'ID_PAROLA, preso dalle risposte
         $rispostaData = $risposte[$j]["risposta"];//salvo la risposta data dall'utente
-        $query = "SELECT `IT`,`EN` FROM `parole` WHERE ID_PAROLE='$ID_PAROLA'"; //carica gli attributi EN e IT della parola, tramite l'ID_PAROLA
+        $query = "SELECT `IT`,`EN` FROM `parole` WHERE ID_PAROLA='$ID_PAROLA'"; //carica gli attributi EN e IT della parola, tramite l'ID_PAROLA
         $result = mysqli_query($database, $query);
         $row = mysqli_fetch_array($result); //eseguo la query e la salvo
         

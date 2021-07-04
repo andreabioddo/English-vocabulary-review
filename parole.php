@@ -66,12 +66,12 @@ echo"
 $i = 0;
 
 $ID_PERSONA = $_SESSION["ID_PERSONA"];
-$query = "SELECT parole.ID_PAROLE, parole.IT, parole.EN, tipo_parola.Descrizione FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO = tipo_parola.ID_TIPO WHERE parole.ID_PERSONA=$ID_PERSONA";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
+$query = "SELECT parole.ID_PAROLA, parole.IT, parole.EN, tipo_parola.Descrizione FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO = tipo_parola.ID_TIPO WHERE parole.ID_PERSONA=$ID_PERSONA";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
 $result = mysqli_query($database, $query); //esegue la query e salva su result
 //per ogni n riga (== num_domande) esegue, tale che n <= num_domande...
 while($row = mysqli_fetch_array($result)){ 
         echo "
-        <textarea hidden name='parole[".$i."][ID_PAROLE]'>".$row["ID_PAROLE"]." </textarea>
+        <textarea hidden name='parole[".$i."][ID_PAROLA]'>".$row["ID_PAROLA"]." </textarea>
         <br> <strong>" . $row["IT"] . " </strong> che si traduce in <strong> " .$row["EN"] . " </strong>      "."  (lista =".$row["Descrizione"].")".
         "<input type='checkbox' id='elimina' name='parole[$i][elimina]' value='1'>".
         "<label for='elimina'>Elimina</label>";
@@ -84,7 +84,7 @@ echo " <br>
 ";
 echo " <hr> <h3> Le altre parole disponibili </h3>";
 
-$query = "SELECT parole.ID_PAROLE, parole.IT, parole.EN, tipo_parola.Descrizione FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO = tipo_parola.ID_TIPO WHERE NOT parole.ID_PERSONA=$ID_PERSONA ";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
+$query = "SELECT parole.ID_PAROLA, parole.IT, parole.EN, tipo_parola.Descrizione FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO = tipo_parola.ID_TIPO WHERE NOT parole.ID_PERSONA=$ID_PERSONA ";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
 $result = mysqli_query($database, $query); //esegue la query e salva su result
 //per ogni n riga (== num_domande) esegue, tale che n <= num_domande...
 while($row = mysqli_fetch_array($result)){ 
@@ -95,10 +95,10 @@ while($row = mysqli_fetch_array($result)){
 if(isset($_POST["aggiorna"])){
   $risposte = isset($_POST['parole'])? $_POST['parole']:array(); //si salva l'array di dati passato dal form
   for($i = 0; $i < sizeof($risposte) ; $i++){ //per ogni riga di dati in arrivo del form
-    $ID_PAROLA = $risposte[$i]["ID_PAROLE"];//salvo l'ID_PAROLA, preso dalle risposte
+    $ID_PAROLA = $risposte[$i]["ID_PAROLA"];//salvo l'ID_PAROLA, preso dalle risposte
     $elimina = isset($risposte[$i]["elimina"])? "1":"0"; //setta valore di elimina
     if($elimina == 1){//se elimina è 1, allora ogni parola del tipo viene eliminata
-      $query="DELETE FROM parole WHERE `ID_PAROLE`=$ID_PAROLA";
+      $query="DELETE FROM parole WHERE `ID_PAROLA`=$ID_PAROLA";
       mysqli_query($database, $query);
     }
   }
