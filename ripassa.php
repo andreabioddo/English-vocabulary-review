@@ -7,7 +7,7 @@
 <body>
 
 <?php require "utili/funzioni_utili.php";  include "utili/navbar.php";?>
-<form method='post' action='ripassa.php'>
+<form method='post' action='ripassa'>
     <label for='num_domande'>Numero di domande</label><br>
     <input type='text' id='num_domande' name='num_domande'  value ="4"><br>
     <label for='Descrizione_Sessione'>Nome sessione</label><br>
@@ -34,7 +34,7 @@
 <?php 
 //controllo se l'utente è loggato, se non lo è, lo porto sulla pagina del login
 if(!isset($_SESSION["ID_PERSONA"])){
-    header("location: login.php");
+    header("location: login");
 }
 
 require "action-db/server.php"; //prendo parametri del db
@@ -48,7 +48,7 @@ if(isset($_POST["inizia"])){
     //inserisco parametri "nascosti" che ervono per il passaggio di info
     echo "
     <div>
-        <form method='post' action='ripassa.php'>
+        <form method='post' action='ripassa'>
             <textarea hidden name='Descrizione_Sessione'>".$_POST["Descrizione_Sessione"]." </textarea>
             <textarea hidden name='num_domande'>".$num_domande." </textarea>
             <textarea hidden name='tipo_esercizio'>".$tipo_esercizio." </textarea>

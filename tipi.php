@@ -7,7 +7,7 @@
 <body>
 
 <?php require "utili/funzioni_utili.php"; include "utili/navbar.php"; ?>
-<form method='post' action='tipi.php'>
+<form method='post' action='tipi'>
     <label for='tipi'>Aggiungi tipo</label><br>
     <input type='text' id='tipi' name='tipi'><br>
     <input type="checkbox" id="pubblico" name="pubblico" value="1">
@@ -20,7 +20,7 @@
 
 //controllo se l'utente è loggato, se non lo è, lo porto sulla pagina del login
 if(!isset($_SESSION["ID_PERSONA"])){
-    header("location: login.php");
+    header("location: login");
 }
   
 require "action-db/server.php"; //prendo parametri del db
@@ -62,7 +62,7 @@ $query = "SELECT `Descrizione`, `Pubblico`, `ID_TIPO` FROM `tipo_parola` WHERE I
 $result = mysqli_query($database, $query); //esegue la query e salva su result
 
 echo"
-    <form method='post' action='tipi.php'>
+    <form method='post' action='tipi'>
     ";
 
 $i = 0;

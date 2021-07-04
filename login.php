@@ -36,7 +36,7 @@ if(isset($_POST["login"])){
         $row = mysqli_fetch_array($result);
     
         $_SESSION['ID_PERSONA'] = $row["ID_PERSONA"];
-        header("location: ripassa.php");
+        header("location: ripassa");
 
     } else {
         array_push($error, "Utente o password errata");
@@ -51,7 +51,7 @@ if(isset($_POST["login"])){
   	<h2>Login</h2>
   </div>
   <?php foreach ($error as $e) {echo $e . "<br>";} ?>
-  <form method="post" action="login.php">
+  <form method="post" action="login">
   	<div class="input-group">
   		<label>Username or Email</label>
   		<input required type="text" name="usernameEmail" >
@@ -64,7 +64,7 @@ if(isset($_POST["login"])){
   		<button type="submit" class="btn" name="login">Login</button>
   	</div>
   	<p>
-  		Not yet a member? <a href="registrazione.php">Sign up</a>
+  		Not yet a member? <a href="registrazione">Sign up</a>
   	</p>
   </form>
 

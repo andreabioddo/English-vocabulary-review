@@ -12,7 +12,7 @@ require "utili/funzioni_utili.php"; //carico funzioni utili
 
 //controllo se l'utente è loggato, se non lo è, lo porto sulla pagina del login
 if(!isset($_SESSION["ID_PERSONA"])){
-  header("location: login.php");
+  header("location: login");
 }
 
 if(isset($_POST["aggiungi"])){
@@ -35,7 +35,7 @@ if(isset($_POST["aggiungi"])){
   	<h2>Aggiungi parola</h2>
   </div>
 	 
-  <form method="post" action="parole.php">
+  <form method="post" action="parole">
   	<div class="input-group">
   		<label>In Inglese</label>
   		<input type="text" name="EN" >
@@ -61,7 +61,7 @@ if(isset($_POST["aggiungi"])){
 <?php
 
 echo"
-  <form method='post' action='parole.php'>
+  <form method='post' action='parole'>
 ";
 $i = 0;
 

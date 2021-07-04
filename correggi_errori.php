@@ -7,7 +7,7 @@
 <body>
 
 <?php require "utili/funzioni_utili.php"; include "utili/navbar.php";?>
-<form method='post' action='correggi_errori.php'>
+<form method='post' action='correggi_errori'>
     <label for='num_errori'>Numero di domande</label><br>
     <input type='text' id='num_errori' name='num_errori' value ="4"><br>
     <div class="input-group">
@@ -25,7 +25,7 @@
 
 //controllo se l'utente è loggato, se non lo è, lo porto sulla pagina del login
 if(!isset($_SESSION["ID_PERSONA"])){
-    header("location: login.php");
+    header("location: login");
 }
 
 //metodo per la realizzazione del menu a tendina che permette di scegliere quale sessione correggere
@@ -69,7 +69,7 @@ if(isset($_POST["inizia"])){
     if($ID_SESSIONE != -1){//se la sessione è -1, non sono state trovate sessioni da correggere       
         //inserisco parametri "nascosti" che servono per il passaggio di informazioni di sistema
         echo "
-        <form method='post' action='correggi_errori.php'>
+        <form method='post' action='correggi_errori'>
             <textarea hidden name='num_errori'>".$num_errori." </textarea>
             <textarea hidden name='ID_SESSIONE'>$ID_SESSIONE</textarea>
         ";
