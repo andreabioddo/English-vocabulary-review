@@ -23,7 +23,7 @@ if(isset($_POST["aggiungi"])){
   $tipo = $_POST["Tipo"];
   $ID_PERSONA = $_SESSION["ID_PERSONA"];
   //preparo la query
-  $query = "INSERT INTO parole(IT, EN, ID_TIPO, ID_PERSONA, attivo, Data_Inserimento) VALUES ('$IT', '$EN', '$tipo', '$ID_PERSONA', '1', '$date')";
+  $query = "INSERT INTO parole(IT, EN, ID_TIPO, ID_PERSONA, Data_Inserimento) VALUES ('$IT', '$EN', '$tipo', '$ID_PERSONA', '$date')";
   //eseguo la query
   $result = mysqli_query($database, $query);
 

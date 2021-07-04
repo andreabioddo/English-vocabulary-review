@@ -119,15 +119,17 @@ if(isset($_POST["controlla"]) && isset($_POST["num_errori"])){
         $result = mysqli_query($database, $query);
         $row = mysqli_fetch_array($result); //eseguo la query e la salvo
         
-        if(strtolower($row["IT"])==strtolower($rispostaData) || strtolower($row["EN"])==strtolower($rispostaData)) 
+        if(strtolower($row["IT"])==strtolower($rispostaData) || strtolower($row["EN"])==strtolower($rispostaData)) {
             $corretto=1;
-        else
+        }else{
             $corretto=0; //se la risposta data è uguale a quella salvata su db, allora corretto==1, 0 altrimenti
+        }
         $query = " UPDATE  sessione_dettaglio SET Corretto=$corretto WHERE ID_SESSIONE=$ID_SESSIONE AND ID_PAROLA=$ID_PAROLA";//salvo tutto in sessione_dettaglio come nuovo record
         mysqli_query($database, $query);
         $j ++;
-        if(!$corretto) //se la risposta è sbagliata salvo in array
+        if(!$corretto){ //se la risposta è sbagliata salvo in array
             array_push($errori, $row["IT"], $row["EN"], $rispostaData); //L'array degli errori è [errore in IT, errore in EN, risposta data]
+        }
     }
 
     echo "Nell'ultima sessione, hai sbagliato queste parole:<hr>";
