@@ -1,7 +1,12 @@
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrazione</title>
+</head>
+<body>
 <?php
-
+include "utili/navbar.php";
 require "action-db/server.php"; //prendo parametri del db
 session_start();
 $error = array();
@@ -75,3 +80,5 @@ if(isset($_POST["register"])){
     <p>Already have an account? <a href="login.php">Sign in</a>.</p>
   </div>
 </form> 
+
+<?php include "utili/footer.php";?>

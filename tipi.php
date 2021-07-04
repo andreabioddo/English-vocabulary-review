@@ -1,10 +1,18 @@
-<?php require "utili/funzioni_utili.php"; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tipi</title>
+</head>
+<body>
+
+<?php require "utili/funzioni_utili.php"; include "utili/navbar.php"; ?>
 <form method='post' action='tipi.php'>
     <label for='tipi'>Aggiungi tipo</label><br>
     <input type='text' id='tipi' name='tipi'><br>
     <input type="checkbox" id="pubblico" name="pubblico" value="1">
     <label for="pubblico">Pubblico</label><br>
-    <button type="submit" class=""  name="aggiungi_tipo">Inizia</button>
+    <button type="submit" class=""  name="aggiungi_tipo">Aggiungi</button>
 </form> 
 <hr>
 
@@ -16,9 +24,8 @@ if(!isset($_SESSION["ID_PERSONA"])){
 }
   
 require "action-db/server.php"; //prendo parametri del db
-
 //Se si clicca aggiunge tipo e tipo è non nullo
-if(isset($_POST["aggiungi_tipo"]) && $_POST["tipi"]==""){ 
+if(isset($_POST["aggiungi_tipo"]) && $_POST["tipi"]!=""){ 
     $ID_PERSONA = $_SESSION["ID_PERSONA"]; //asalvo id persona
     $tipo_nuovo = $_POST["tipi"]; //salvo il nuovo tipo
     $pubblico = isset($_POST["pubblico"])?$_POST["pubblico"]:"0"; //setto lo stato del nuovo tipo
@@ -73,7 +80,7 @@ while($row = mysqli_fetch_array($result)){ //scrivo tutte le righe, creo il form
 echo " 
         <button type='submit'  name='aggiorna'>Aggiorna</button>
     </form>
-    <hr> Le altre parole disponibili
+    <hr> <h3> Gli altri tipi disponibili </h3>
     ";
 
 //scrivo a video ogni riga presente nel db come tipo pubblico non della persona (tutti gli altri diversi dai suoi)
@@ -84,6 +91,7 @@ while($row = mysqli_fetch_array($result)){
 }   
 
 
+include "utili/footer.php";
 
 ?>
 

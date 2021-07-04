@@ -1,12 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Parole</title>
+</head>
+<body>
 <?php
+include "utili/navbar.php";
+require "action-db/server.php"; //prendo parametri del db
+require "utili/funzioni_utili.php"; //carico funzioni utili
 
 //controllo se l'utente è loggato, se non lo è, lo porto sulla pagina del login
 if(!isset($_SESSION["ID_PERSONA"])){
   header("location: login.php");
 }
-
-require "action-db/server.php"; //prendo parametri del db
-require "utili/funzioni_utili.php"; //carico funzioni utili
 
 if(isset($_POST["aggiungi"])){
 
@@ -25,7 +32,7 @@ if(isset($_POST["aggiungi"])){
 ?>
 
 <div class="header">
-  	<h2>Add parola</h2>
+  	<h2>Aggiungi parola</h2>
   </div>
 	 
   <form method="post" action="parole.php">
@@ -52,22 +59,52 @@ if(isset($_POST["aggiungi"])){
 <h1> Le tue parole </h1>
 
 <?php
+
+echo"
+  <form method='post' action='parole.php'>
+";
+$i = 0;
+
 $ID_PERSONA = $_SESSION["ID_PERSONA"];
-$query = "SELECT `IT`,`EN`, `ID_PAROLE` FROM `parole` WHERE ID_PERSONA =$ID_PERSONA";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
+$query = "SELECT parole.ID_PAROLE, parole.IT, parole.EN, tipo_parola.Descrizione FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO = tipo_parola.ID_TIPO WHERE parole.ID_PERSONA=$ID_PERSONA";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
 $result = mysqli_query($database, $query); //esegue la query e salva su result
 //per ogni n riga (== num_domande) esegue, tale che n <= num_domande...
 while($row = mysqli_fetch_array($result)){ 
-        echo "<br>" . $row["IT"] . "    " .$row["EN"] ;
+        echo "
+        <textarea hidden name='parole[".$i."][ID_PAROLE]'>".$row["ID_PAROLE"]." </textarea>
+        <br> <strong>" . $row["IT"] . " </strong> che si traduce in <strong> " .$row["EN"] . " </strong>      "."  (lista =".$row["Descrizione"].")".
+        "<input type='checkbox' id='elimina' name='parole[$i][elimina]' value='1'>".
+        "<label for='elimina'>Elimina</label>";
+        $i++;
 }   
 
-echo " <hr> Le altre parole disponibili";
+echo " <br>
+    <button type='submit' name='aggiorna'>Aggiorna</button>
+</form>
+";
+echo " <hr> <h3> Le altre parole disponibili </h3>";
 
-$query = "SELECT `IT`,`EN`, `ID_PAROLE` FROM `parole` WHERE NOT ID_PERSONA =$ID_PERSONA";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
+$query = "SELECT parole.ID_PAROLE, parole.IT, parole.EN, tipo_parola.Descrizione FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO = tipo_parola.ID_TIPO WHERE NOT parole.ID_PERSONA=$ID_PERSONA ";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
 $result = mysqli_query($database, $query); //esegue la query e salva su result
 //per ogni n riga (== num_domande) esegue, tale che n <= num_domande...
 while($row = mysqli_fetch_array($result)){ 
-        echo "<br>". $row["IT"] . "  che si traduce in  " .$row["EN"];
+        echo "<br><strong>". $row["IT"] . "</strong>  che si traduce in  <strong>" .$row["EN"] ."</strong>"."  (lista =".$row["Descrizione"].")";
 }   
 
+
+if(isset($_POST["aggiorna"])){
+  $risposte = isset($_POST['parole'])? $_POST['parole']:array(); //si salva l'array di dati passato dal form
+  for($i = 0; $i < sizeof($risposte) ; $i++){ //per ogni riga di dati in arrivo del form
+    $ID_PAROLA = $risposte[$i]["ID_PAROLE"];//salvo l'ID_PAROLA, preso dalle risposte
+    $elimina = isset($risposte[$i]["elimina"])? "1":"0"; //setta valore di elimina
+    if($elimina == 1){//se elimina è 1, allora ogni parola del tipo viene eliminata
+      $query="DELETE FROM parole WHERE `ID_PAROLE`=$ID_PAROLA";
+      mysqli_query($database, $query);
+    }
+  }
+}
+
+
+include "utili/footer.php";
 
 ?>

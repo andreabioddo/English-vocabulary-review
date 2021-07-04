@@ -1,4 +1,12 @@
-<?php require "utili/funzioni_utili.php"; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Errori</title>
+</head>
+<body>
+
+<?php require "utili/funzioni_utili.php"; include "utili/navbar.php";?>
 <form method='post' action='correggi_errori.php'>
     <label for='num_errori'>Numero di domande</label><br>
     <input type='text' id='num_errori' name='num_errori' value ="4"><br>
@@ -130,4 +138,5 @@ if(isset($_POST["controlla"]) && isset($_POST["num_errori"])){
     echo " <hr> Gli errori che hai fatto sono ". sizeof($errori)/3;
 }
 
+include "utili/footer.php";
 ?>

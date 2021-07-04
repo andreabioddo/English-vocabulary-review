@@ -1,6 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+
 <?php
+include "utili/navbar.php";
 require "action-db/server.php"; //prendo parametri del db
 session_start();
+
+if(isset($_SESSION["ID_PERSONA"])){
+    echo "<h4> Sei già loggato! </h4>";
+} else {
+    echo "<h4> Non hai ancora effettuato l'accesso! </h4>!";
+}
 $error = array();
 if(isset($_POST["login"])){
     //prendo i parametri di Tipo POST dal file chiamante e li salvo in una variabile
@@ -53,3 +68,4 @@ if(isset($_POST["login"])){
   	</p>
   </form>
 
+<?php include "utili/footer.php"; ?>

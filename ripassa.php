@@ -1,4 +1,12 @@
-<?php require "utili/funzioni_utili.php"; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ripassa</title>
+</head>
+<body>
+
+<?php require "utili/funzioni_utili.php";  include "utili/navbar.php";?>
 <form method='post' action='ripassa.php'>
     <label for='num_domande'>Numero di domande</label><br>
     <input type='text' id='num_domande' name='num_domande'  value ="4"><br>
@@ -144,5 +152,8 @@ if(isset($_POST["controlla"]) && isset($_POST["num_domande"])){
     }
     echo " <hr> Gli errori che hai fatto sono ". sizeof($errori)/3;
 }
+
+
+include "utili/footer.php";
 
 ?>
