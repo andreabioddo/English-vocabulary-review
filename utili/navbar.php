@@ -31,9 +31,9 @@ li a:hover:not(.active) {
 </style>
 
 <ul>
-  <li><a href="../parole.php">Parole</a></li>
-  <li><a href="../liste.php">Liste</a></li>
-  <li><a href="../ripassa.php">Ripassa</a></li>
-  <li><a href="../correggi_errori.php">Correggi Errori</a></li>
-  <li><a href="www.andreabioddo.com">About</a></li>
+  <li><a href="parole">Parole</a></li>
+  <li><a href="tipi">Liste</a></li>
+  <li><a href="ripassa">Ripassa</a></li>
+  <li><a href="correggi_errori">Correggi Errori</a></li>
+  <li><a href="https://www.andreabioddo.com">About</a></li>
 </ul>
