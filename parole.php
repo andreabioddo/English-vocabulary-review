@@ -78,7 +78,8 @@ echo"
 $i = 0;
 
 $ID_PERSONA = $_SESSION["ID_PERSONA"];
-$query = "SELECT parole.ID_PAROLA, parole.IT, parole.EN, tipo_parola.Descrizione FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO = tipo_parola.ID_TIPO WHERE parole.ID_PERSONA=$ID_PERSONA";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
+$query = "SELECT parole.ID_PAROLE, parole.IT, parole.EN, tipo_parola.Descrizione FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO = tipo_parola.ID_TIPO WHERE parole.ID_PERSONA=$ID_PERSONA";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
+echo $query;
 $result = mysqli_query($database, $query); //esegue la query e salva su result
 //per ogni n riga (== num_domande) esegue, tale che n <= num_domande...
 while($row = mysqli_fetch_array($result)){ 
@@ -96,7 +97,7 @@ echo " <br>
 ";
 echo " <hr> <h3> Le altre parole disponibili </h3>";
 
-$query = "SELECT parole.ID_PAROLA, parole.IT, parole.EN, tipo_parola.Descrizione FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO = tipo_parola.ID_TIPO WHERE NOT parole.ID_PERSONA=$ID_PERSONA ";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
+$query = "SELECT parole.ID_PAROLE, parole.IT, parole.EN, tipo_parola.Descrizione FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO = tipo_parola.ID_TIPO WHERE NOT parole.ID_PERSONA=$ID_PERSONA ";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
 $result = mysqli_query($database, $query); //esegue la query e salva su result
 //per ogni n riga (== num_domande) esegue, tale che n <= num_domande...
 while($row = mysqli_fetch_array($result)){ 

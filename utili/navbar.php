@@ -31,11 +31,13 @@ body {margin:0;}
 </style>
 
 <ul class="ul-nav">
-  <li class="li-nav"><a href="parole">Parole</a></li>
-  <li class="li-nav"><a href="tipi">Liste</a></li>
-  <li class="li-nav"><a href="ripassa">Ripassa</a></li>
-  <li class="li-nav"><a href="correggi_errori">Correggi Errori</a></li>
-  <li class="li-nav"><a href="istruzioni">Istruzioni</a></li>
-  <li class="li-nav"><a href="login">Login</a></li>
+  <li class="li-nav"><a href="parole.php">Parole</a></li>
+  <li class="li-nav"><a href="tipi.php">Liste</a></li>
+  <li class="li-nav"><a href="ripassa.php">Ripassa</a></li>
+  <li class="li-nav"><a href="correggi_errori.php">Correggi Errori</a></li>
+  <li class="li-nav"><a href="istruzioni.php">Istruzioni</a></li>
+  <li class="li-nav"><a href="login.php">Login</a></li>
+  <li class="li-nav"><a href="registrazione.php">Registrati</a></li>
+  <li class="li-nav"><a href="session_destroy.php">Loguot</a></li>
   <li class="li-nav"><a href="https://www.andreabioddo.com">About</a></li>
 </ul>

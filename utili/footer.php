@@ -9,6 +9,6 @@
     </style>
     
     <div class="footer">
-      <p>Biddo 2021 - Version 1.0.2</p>
+      <p>Biddo 2021 - Version 1.1.0</p>
     </div> 
 </body>

@@ -14,7 +14,7 @@ session_start();
 if(isset($_SESSION["ID_PERSONA"])){
     echo "<h4> Sei già loggato! </h4>";
 } else {
-    echo "<h4> Non hai ancora effettuato l'accesso! </h4>!";
+    echo "<h4> Non hai ancora effettuato l'accesso!</h4>";
 }
 $error = array();
 if(isset($_POST["login"])){
@@ -36,7 +36,7 @@ if(isset($_POST["login"])){
         $row = mysqli_fetch_array($result);
     
         $_SESSION['ID_PERSONA'] = $row["ID_PERSONA"];
-        header("location: ripassa");
+        header("location: parole.php");
 
     } else {
         array_push($error, "Utente o password errata");
@@ -51,7 +51,7 @@ if(isset($_POST["login"])){
   	<h2>Login</h2>
   </div>
   <?php foreach ($error as $e) {echo $e . "<br>";} ?>
-  <form method="post" action="login">
+  <form method="post" action="login.php">
   	<div class="input-group">
   		<label>Username or Email</label>
   		<input required type="text" name="usernameEmail" >
@@ -64,7 +64,7 @@ if(isset($_POST["login"])){
   		<button type="submit" class="btn" name="login">Login</button>
   	</div>
   	<p>
-  		Not yet a member? <a href="registrazione">Sign up</a>
+  		Not yet a member? <a href="registrazione.php">Sign up</a>
   	</p>
   </form>
 
