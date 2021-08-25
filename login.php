@@ -7,7 +7,7 @@
 <body>
 
 <?php
-include "utili/navbar.php";
+require "utili/navbar.php";
 require "action-db/server.php"; //prendo parametri del db
 session_start();
 

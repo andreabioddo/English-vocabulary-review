@@ -40,14 +40,13 @@ if(isset($_POST["register"])){
     //eseguo la query
     $result = mysqli_query($database, $query);
     
-    
     $query = "SELECT ID_PERSONA FROM `persone` WHERE `Utente`='$username' OR Email ='$email'" ;
     //eseguo la query
     $result = mysqli_query($database, $query);
     $row = mysqli_fetch_array($result);
     $_SESSION['ID_PERSONA'] = $row["ID_PERSONA"];
     
-    //header("location: registrazione");
+    header("location: parole");
   }
 }
 

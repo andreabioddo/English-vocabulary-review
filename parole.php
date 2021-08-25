@@ -15,6 +15,18 @@ if(!isset($_SESSION["ID_PERSONA"])){
   header("location: login");
 }
 
+if(isset($_POST["aggiorna"])){
+  $risposte = isset($_POST['parole'])? $_POST['parole']:array(); //si salva l'array di dati passato dal form
+  for($i = 0; $i < sizeof($risposte) ; $i++){ //per ogni riga di dati in arrivo del form
+    $ID_PAROLA = $risposte[$i]["ID_PAROLA"];//salvo l'ID_PAROLA, preso dalle risposte
+    $elimina = isset($risposte[$i]["elimina"])? "1":"0"; //setta valore di elimina
+    if($elimina == 1){//se elimina è 1, allora ogni parola del tipo viene eliminata
+      $query="DELETE FROM parole WHERE `ID_PAROLA`=$ID_PAROLA";
+      mysqli_query($database, $query);
+    }
+  }
+}
+
 if(isset($_POST["aggiungi"])){
 
   //prendo i parametri di Tipo POST dal file chiamante e li salvo in una variabile
@@ -92,17 +104,7 @@ while($row = mysqli_fetch_array($result)){
 }   
 
 
-if(isset($_POST["aggiorna"])){
-  $risposte = isset($_POST['parole'])? $_POST['parole']:array(); //si salva l'array di dati passato dal form
-  for($i = 0; $i < sizeof($risposte) ; $i++){ //per ogni riga di dati in arrivo del form
-    $ID_PAROLA = $risposte[$i]["ID_PAROLA"];//salvo l'ID_PAROLA, preso dalle risposte
-    $elimina = isset($risposte[$i]["elimina"])? "1":"0"; //setta valore di elimina
-    if($elimina == 1){//se elimina è 1, allora ogni parola del tipo viene eliminata
-      $query="DELETE FROM parole WHERE `ID_PAROLA`=$ID_PAROLA";
-      mysqli_query($database, $query);
-    }
-  }
-}
+
 
 
 include "utili/footer.php";

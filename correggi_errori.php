@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<?php require "utili/funzioni_utili.php"; include "utili/navbar.php";?>
+<?php require "utili/funzioni_utili.php"; require "utili/navbar.php";?>
 <form method='post' action='correggi_errori'>
     <label for='num_errori'>Numero di domande</label><br>
     <input type='text' id='num_errori' name='num_errori' value ="4"><br>
