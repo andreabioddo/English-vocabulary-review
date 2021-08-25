@@ -47,14 +47,14 @@ if(isset($_POST["register"])){
     $row = mysqli_fetch_array($result);
     $_SESSION['ID_PERSONA'] = $row["ID_PERSONA"];
     
-    header("location: registrazione");
+    //header("location: registrazione");
   }
 }
 
 ?>
 
 
-<form action="registrazione" method="POST">
+<form action="registrazione.php" method="POST">
   <div class="container">
     <h1>Register</h1>
     <p>Please fill in this form to create an account.</p>
