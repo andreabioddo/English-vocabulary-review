@@ -27,12 +27,12 @@ if(isset($_POST["aggiorna"])){
   }
 }
 
-if(isset($_POST["aggiungi"])){
+if(isset($_GET["aggiungi"])){
 
   //prendo i parametri di Tipo POST dal file chiamante e li salvo in una variabile
-  $EN = ucfirst($_POST["EN"]);
-  $IT = ucfirst($_POST["IT"]);
-  $tipo = $_POST["Tipo"];
+  $EN = ucfirst($_GET["EN"]);
+  $IT = ucfirst($_GET["IT"]);
+  $tipo = $_GET["Tipo"];
   $ID_PERSONA = $_SESSION["ID_PERSONA"];
   //preparo la query
   $query = "INSERT INTO parole(IT, EN, ID_TIPO, ID_PERSONA, Data_Inserimento) VALUES ('$IT', '$EN', '$tipo', '$ID_PERSONA', '$date')";
@@ -47,7 +47,7 @@ if(isset($_POST["aggiungi"])){
   	<h2>Aggiungi parola</h2>
   </div>
 	 
-  <form method="post" action="parole">
+  <form method="GET" action="parole.php">
   	<div class="input-group">
   		<label>In Inglese</label>
   		<input type="text" name="EN" >
@@ -59,7 +59,14 @@ if(isset($_POST["aggiungi"])){
   	<div class="input-group">
       <label for="Tipo">Tipo</label>
         <select id="Tipo" name="Tipo">
-            <?php echo inseriscitTipi(); ?>
+          <?php 
+            if(isset($_GET["Tipo"])){
+              echo inseriscitTipi($_GET["Tipo"]); 
+            } else {
+              echo inseriscitTipi(-1); 
+            }
+            
+          ?>
         </select> 
   	</div>
   	<div class="input-group">
@@ -73,13 +80,12 @@ if(isset($_POST["aggiungi"])){
 <?php
 
 echo"
-  <form method='post' action='parole'>
+  <form method='post' action='parole.php'>
 ";
 $i = 0;
 
 $ID_PERSONA = $_SESSION["ID_PERSONA"];
-$query = "SELECT parole.ID_PAROLE, parole.IT, parole.EN, tipo_parola.Descrizione FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO = tipo_parola.ID_TIPO WHERE parole.ID_PERSONA=$ID_PERSONA";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
-echo $query;
+$query = "SELECT parole.ID_PAROLA, parole.IT, parole.EN, tipo_parola.Descrizione FROM `parole` INNER JOIN tipo_parola ON parole.ID_TIPO = tipo_parola.ID_TIPO WHERE parole.ID_PERSONA=$ID_PERSONA";//aggiungere WHERE ID_PERSONA='$ID_PERSONA' per mettere solo parole della persona
 $result = mysqli_query($database, $query); //esegue la query e salva su result
 //per ogni n riga (== num_domande) esegue, tale che n <= num_domande...
 while($row = mysqli_fetch_array($result)){ 

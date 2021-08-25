@@ -32,7 +32,6 @@ if(isset($_POST["aggiungi_tipo"]) && $_POST["tipi"]!=""){
     //query per aggiunta del tipo su db
     $query = "INSERT INTO tipo_parola(Descrizione, ID_PERSONA, Pubblico, Data_Inserimento) VALUES ('$tipo_nuovo', '$ID_PERSONA', '$pubblico', '$date')";
     mysqli_query($database, $query);
-    echo $query;
 }
 
 //se viene cliccato aggiorna, vengono aggiornate le preferenze di ogni singolo tipo
